@@ -4,15 +4,49 @@
            <img src="~assets/img/logo.svg" alt="" class="nav-logo">
            <span>vue3+ts</span>
        </div>
+       <el-menu default-active="1" class="el-menu-vertical" background-color="#0c2135" text-color="#b7bdc3"
+       active-text-color="#0a60bd">
+           <div v-for="item in userMenus" :key="item.id">
+               <!-- 二级菜单 -->
+               <template v-if="item.type ===1">
+                   <!-- 二级菜单可展开的标题 -->
+                    <el-sub-menu :index="item.id + ''">
+                        <template #title>
+                            <i v-if="item.icon" :class="item.icon"></i>
+                            <span>{{item.name}}</span>
+                        </template>
+                        <!-- 遍历里面的item -->
+                       <template v-for="subitem in item.children" :key="subitem.id">
+                            <el-menu-item :index="subitem.id + ''">
+                                <i v-if="subitem.icon" :class="subitem.icon"></i>
+                                <span>{{ subitem.name }}</span>
+                            </el-menu-item>
+                        </template>
+                    </el-sub-menu>
+               </template>
+               <!-- 一级菜单 -->
+                <template v-else-if="item.type ===2">
+                    <el-menu-item :index="item.id + ''">
+                        <i v-if="item.icon" :class="item.icon"></i>
+                        <span>{{ item.name }}</span>
+                    </el-menu-item>
+               </template>
+           </div>
+      </el-menu>
     </div>
 </template>
 
 <script>
-import { defineComponent } from "vue"
+import { defineComponent, computed } from "vue"
+import { useStore } from "vuex"
 
 export default defineComponent({
-   components: {
-      
+   setup() {
+       const store = useStore()
+       const userMenus = computed(() => store.state.login.userMenus)
+       return {
+           userMenus
+       }
    }
 })
 </script>
@@ -26,6 +60,13 @@ export default defineComponent({
         height: 20px;
         margin-right: 10px;
     }
+}
+.el-menu-item:hover {
+    color: #fff;
+}
+.el-menu-item.is-active {
+    background-color: #0a60bd;
+    color: #fff;
 }
     
 </style>

@@ -13,7 +13,11 @@ import {
     ElContainer,
     ElAside,
     ElHeader,
-    ElMain
+    ElMain,
+    ElMenu,
+    ElSubMenu,
+    ElMenuItemGroup,
+    ElMenuItem
 } from 'element-plus';
 
 const components = [
@@ -29,7 +33,11 @@ const components = [
     ElContainer,
     ElAside,
     ElHeader,
-    ElMain
+    ElMain,
+    ElMenu,
+    ElSubMenu,
+    ElMenuItemGroup,
+    ElMenuItem
 ]
 
 export function registerApp(app: App): void{

@@ -59,8 +59,8 @@ const loginModule: Module<ILoginState, IRootState> = {
             //请求用户菜单
             const userMenusResult = await requestUserMenusByRoleId(userInfo.role.id);
             const userMenus = userMenusResult.data;
-            // commit('changeUserMenus', userMenus)
-            // localCache.setCache('userMenus', userMenus)
+            commit('changeUserMenus', userMenus)
+            localCache.setCache('userMenus', userMenus)
             console.log(userMenus)
 
             //跳到首页
@@ -73,13 +73,13 @@ const loginModule: Module<ILoginState, IRootState> = {
             }
 
             const userInfo = localCache.getCache('userInfo')
-            if(token) {
-                commit('changeUserInfo', token)
+            if(userInfo) {
+                commit('changeUserInfo', userInfo)
             }
 
             const userMenus = localCache.getCache('userMenus')
             if(userMenus) {
-                commit('changeUserMenus', token)
+                commit('changeUserMenus', userMenus)
             }
         }
     }
