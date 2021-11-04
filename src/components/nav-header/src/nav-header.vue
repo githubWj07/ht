@@ -10,16 +10,18 @@
 import { defineComponent, ref } from "vue"
 
 export default defineComponent({
-   setup() {
+    emits:['foldChange'],
+    setup(props, {emit}) {
         const isFold = ref (false)
         const handleFoldClick = () => {
-            isFold.value = !isFold.value
+            isFold.value = !isFold.value;
+            emit('foldChange', isFold.value)
         }
         return {
             isFold,
             handleFoldClick
         }
-   }
+    }
 })
 </script>
 

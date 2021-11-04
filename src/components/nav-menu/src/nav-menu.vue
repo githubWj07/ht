@@ -1,19 +1,25 @@
 <template>
     <div class="nav-menu">
-       <div class="flex nav-logo-wrap">
+        <div class="flex nav-logo-wrap">
            <img src="~assets/img/logo.svg" alt="" class="nav-logo">
-           <span>vue3+ts</span>
-       </div>
-       <el-menu default-active="1" class="el-menu-vertical" background-color="#0c2135" text-color="#b7bdc3"
-       active-text-color="#0a60bd">
-           <div v-for="item in userMenus" :key="item.id">
+           <span v-if="!collapse">vue3+ts</span>
+        </div>
+        <el-menu 
+            default-active="1" 
+            class="el-menu-vertical" 
+            :collapse="collapse"
+            background-color="#0c2135" 
+            text-color="#b7bdc3"
+            active-text-color="#0a60bd"
+        >
+           <template v-for="item in userMenus" :key="item.id">
                <!-- 二级菜单 -->
                <template v-if="item.type ===1">
                    <!-- 二级菜单可展开的标题 -->
                     <el-sub-menu :index="item.id + ''">
                         <template #title>
                             <i v-if="item.icon" :class="item.icon"></i>
-                            <span>{{item.name}}</span>
+                            <span>{{ item.name }}</span>
                         </template>
                         <!-- 遍历里面的item -->
                        <template v-for="subitem in item.children" :key="subitem.id">
@@ -31,7 +37,7 @@
                         <span>{{ item.name }}</span>
                     </el-menu-item>
                </template>
-           </div>
+           </template>
       </el-menu>
     </div>
 </template>
@@ -41,13 +47,19 @@ import { defineComponent, computed } from "vue"
 import { useStore } from "vuex"
 
 export default defineComponent({
-   setup() {
-       const store = useStore()
-       const userMenus = computed(() => store.state.login.userMenus)
-       return {
-           userMenus
-       }
-   }
+    props: {
+        collapse:{
+            type: Boolean,
+            default: false
+        }
+    },
+    setup() {
+        const store = useStore()
+        const userMenus = computed(() => store.state.login.userMenus)
+        return {
+            userMenus
+        }
+    }
 })
 </script>
 
@@ -68,6 +80,10 @@ export default defineComponent({
     background-color: #0a60bd;
     color: #fff;
 }
-    
+.el-menu {
+    border-right: none;
+}
+
 </style>
+
 
