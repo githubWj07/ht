@@ -10,11 +10,12 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/login",
-    name: "Login",
+    name: "login",
     component: login,
   },
   {
     path: "/main",
+    name: "main",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -23,6 +24,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/:pathMatch(.*)*",
+    name: "not-found",
     component: () =>
       import('@/views/not-found/not-found.vue'),
   },
@@ -33,6 +35,8 @@ const router = createRouter({
   routes,
 });
 
+
+//导航守卫
 router.beforeEach((to) => {
   if(to.path !== '/login') {
     const token = localCache.getCache('token');
