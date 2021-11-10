@@ -53,7 +53,6 @@ export default defineComponent({
     }
     .menu-header {
         height: 48px;
-        line-height: 48px;
     }
     .menu-main {
         background-color: #f0f2f5;
