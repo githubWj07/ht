@@ -20,7 +20,8 @@ import {
     ElMenuItem,
     ElDropdown,
     ElDropdownMenu,
-    ElDropdownItem
+    ElDropdownItem,
+    ElAvatar
 } from 'element-plus';
 
 const components = [
@@ -43,7 +44,8 @@ const components = [
     ElMenuItem,
     ElDropdown,
     ElDropdownMenu,
-    ElDropdownItem
+    ElDropdownItem,
+    ElAvatar
 ]
 
 export function registerApp(app: App): void{

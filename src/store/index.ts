@@ -1,7 +1,8 @@
-import { createStore } from "vuex";
+import { createStore, Store, useStore as useVuexStore } from "vuex";
 
 import login from './login/login'
 
+import {IStoreType} from './types'
 
 const store = createStore({
   mutations: {},
@@ -13,6 +14,10 @@ const store = createStore({
 
 export function setupStore() {
   store.dispatch('login/loadLocalLogin')
+}
+
+export function useStore(): Store<IStoreType> {
+  return useVuexStore()
 }
 
 export default store
