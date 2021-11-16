@@ -19,7 +19,7 @@
                     <el-sub-menu :index="item.id + ''">
                         <template #title>
                             <i v-if="item.icon" :class="item.icon"></i>
-                            <span>{{ item.name }}</span>
+                            <span v-if="!collapse">{{ item.name }}</span>
                         </template>
                         <!-- 遍历里面的item -->
                        <template v-for="subitem in item.children" :key="subitem.id">

@@ -21,7 +21,9 @@ import {
     ElDropdown,
     ElDropdownMenu,
     ElDropdownItem,
-    ElAvatar
+    ElAvatar,
+    ElBreadcrumb,
+    ElBreadcrumbItem
 } from 'element-plus';
 
 const components = [
@@ -45,7 +47,9 @@ const components = [
     ElDropdown,
     ElDropdownMenu,
     ElDropdownItem,
-    ElAvatar
+    ElAvatar,
+    ElBreadcrumb,
+    ElBreadcrumbItem
 ]
 
 export function registerApp(app: App): void{

@@ -2,22 +2,28 @@
     <div class="nav-header flex">
         <i class="fold-menu"
            :class="isFold ? 'el-icon-s-fold' : 'el-icon-s-unfold' "
-           @click="handleFoldClick"></i>
-           <div class="flex user-info-wrap">
-               <div>导航</div>
-               <userInfo></userInfo>
-           </div>
+           @click="handleFoldClick">
+        </i>
+        <div class="flex user-info-wrap">
+            <NavBreadcrumb :breadcrumbs="breadcrumbs"></NavBreadcrumb>
+            <UserInfo></UserInfo>
+        </div>
     </div>
 </template>
 
 <script>
-import { defineComponent, ref } from "vue"
+import { defineComponent, ref, computed } from "vue"
+import UserInfo from './user-info.vue'
+import NavBreadcrumb,{IBreadcrumb} from "@/base-ui/breadcrumb"
 
-import userInfo from './user-info.vue'
+import { useStore} from '@/store'
+import { useRoute} from 'vue-router'
+import { pathMapBreadcrumds } from '@/utils/map-menus'
 
 export default defineComponent({
     components:{
-        userInfo
+        UserInfo,
+        NavBreadcrumb
     },
     emits:['foldChange'],
     setup(props, {emit}) {
@@ -26,9 +32,19 @@ export default defineComponent({
             isFold.value = !isFold.value;
             emit('foldChange', isFold.value)
         }
+        //面包屑
+        const store = useStore()
+        const breadcrumbs = computed(() => {
+            const userMenus = store.state.login.userMenus
+            const route = useRoute()
+            const currentPath = route.path
+            return pathMapBreadcrumds(userMenus,currentPath)
+        }) 
+
         return {
             isFold,
-            handleFoldClick
+            handleFoldClick,
+            breadcrumbs
         }
     }
 })
