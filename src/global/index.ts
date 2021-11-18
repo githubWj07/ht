@@ -27,7 +27,8 @@ import {
     ElRow,
     ElCol,
     ElSelect,
-    ElOption
+    ElOption,
+    ElDatePicker
 } from 'element-plus';
 
 const components = [
@@ -57,7 +58,8 @@ const components = [
     ElRow,
     ElCol,
     ElSelect,
-    ElOption
+    ElOption,
+    ElDatePicker
 ]
 
 export function registerApp(app: App): void{
