@@ -3,6 +3,7 @@ import {App} from 'vue';
 import {
     ElButton,
     ElTable,
+    ElTableColumn,
     ElTabs,
     ElTabPane,
     ElForm,
@@ -34,6 +35,7 @@ import {
 const components = [
     ElButton,
     ElTable,
+    ElTableColumn,
     ElTabs,
     ElTabPane,
     ElForm,
