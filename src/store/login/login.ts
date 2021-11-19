@@ -12,7 +12,7 @@ import { mapMenusToRoutes } from '@/utils/map-menus'
 import router from "@/router";
 
 import { IAccount } from "@/service/login/type";
-import {ILoginState} from './type'
+import {ILoginState} from './types'
 
 interface  IRootState {
     name: string
