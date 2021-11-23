@@ -7,7 +7,15 @@
         :propList="propList" 
         :showIndexColumn="showIndexColumn" 
         :showSelectColumn="showSelectColumn"
+        :title="title"
       >
+        <!-- header中的插槽 -->
+        <template #headerHandler>
+          <el-button type="primary" size="mini">新建用户</el-button>
+          <el-button icon="el-icon-refresh" size="mini"></el-button>
+        </template>
+
+        <!-- 列表中的插槽 -->
         <template #status="scope">
           <el-button plain size="mini" :type="scope.row.enable ? 'success' : 'danger' " >
             {{scope.row.enable ? '启用' : '禁用'}}
@@ -52,15 +60,16 @@ export default defineComponent({
     const userList = computed(() => store.state.system.userList)
     const userCount = computed(() => store.state.system.userCount)
 
+    const title = '用户列表'
+
     const propList = [
-      {prop:'id',label:'ID'},
       {prop:'name',label:'用户名'},
       {prop:'realname',label:'真实姓名'},
       {prop:'cellphone',label:'手机号码'},
       {prop:'enable',label:'状态',slotName:'status'},
       {prop:'createAt',label:'创建时间',slotName:'createAt'},
       {prop:'updateAt',label:'更新时间',slotName:'updateAt'},
-      {label:'操作',minWidth:'120',slotName:'handler'}
+      {label:'操作',slotName:'handler'}
     ]
     //是否显示序号
     const showIndexColumn = true
@@ -68,6 +77,7 @@ export default defineComponent({
     const showSelectColumn = true
     return {
       searchFormConfig,
+      title,
       userList,
       propList,
       showIndexColumn,
