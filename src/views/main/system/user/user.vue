@@ -2,7 +2,22 @@
   <div class="user">
     <PageSearch :searchFormConfig="searchFormConfig"/>
     <div class="content">
-      <HyTable :listData="userList" :propList="propList"/>
+      <HyTable 
+        :listData="userList" 
+        :propList="propList" 
+        :showIndexColumn="showIndexColumn" 
+        :showSelectColumn="showSelectColumn"
+      >
+        <template #status="scope">
+          <el-button plain size="mini" :type="scope.row.enable ? 'success' : 'danger' " >
+            {{scope.row.enable ? '启用' : '禁用'}}
+          </el-button>
+        </template>
+        <template #handler>
+          <el-button size="mini" type="text">编辑</el-button>
+          <el-button size="mini" type="text">删除</el-button>
+        </template>
+      </HyTable>
     </div>
   </div>
 </template>
@@ -42,14 +57,21 @@ export default defineComponent({
       {prop:'name',label:'用户名'},
       {prop:'realname',label:'真实姓名'},
       {prop:'cellphone',label:'手机号码'},
-      {prop:'enable',label:'状态'},
-      {prop:'createAt',label:'创建时间'},
-      {prop:'updateAt',label:'更新时间'}
+      {prop:'enable',label:'状态',slotName:'status'},
+      {prop:'createAt',label:'创建时间',slotName:'createAt'},
+      {prop:'updateAt',label:'更新时间',slotName:'updateAt'},
+      {label:'操作',minWidth:'120',slotName:'handler'}
     ]
+    //是否显示序号
+    const showIndexColumn = true
+    //是否显示复选框
+    const showSelectColumn = true
     return {
       searchFormConfig,
       userList,
-      propList
+      propList,
+      showIndexColumn,
+      showSelectColumn
     }
   }
 })

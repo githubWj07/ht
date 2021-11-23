@@ -30,7 +30,7 @@ const systemModule:Module<ISystemState, IRootState> = {
                 payload.pageUrl, 
                 payload.queryInfo
             )
-            console.log(pageResult)
+            
             const { list, totalCount } = pageResult.data;
             
             commit('changeUserList', list)
