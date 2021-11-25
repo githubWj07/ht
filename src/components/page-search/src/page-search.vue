@@ -48,8 +48,13 @@ export default defineComponent({
 
     const formData = ref(formOriginData)
 
+    const handleResetClick = () => {
+      formData.value = formOriginData
+    }
+
     return {
-      formData
+      formData,
+      handleResetClick
     }
   }
 })

@@ -1,7 +1,7 @@
 let BASE_URL =''
 if(process.env.NODE_ENV === 'development'){
-//    BASE_URL = 'http:'
-BASE_URL = 'http://152.136.185.210:5000'
+   BASE_URL = 'http:'
+
 }else if (process.env.NODE_ENV === 'production'){
     BASE_URL = ''
 }else {
