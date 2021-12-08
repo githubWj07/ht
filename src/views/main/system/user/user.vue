@@ -1,12 +1,19 @@
 <template>
   <div class="user">
-    <PageSearch :searchFormConfig="searchFormConfig"/>
-    <PageContent :contentTableConfig="contentTableConfig"></PageContent>
+    <PageSearch 
+      :searchFormConfig="searchFormConfig" 
+      @resetBtnClick="handleResetClick" 
+      @queryBtnClick="handleQueryClick"
+    />
+    <PageContent 
+      ref="PageContentRef"
+      :contentTableConfig="contentTableConfig" 
+    />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
+import { defineComponent, ref } from 'vue'
 
 import PageSearch from '@/components/page-search'
 import PageContent from '@/components/page-content'
@@ -22,9 +29,22 @@ export default defineComponent({
     PageContent
   },
   setup() {
+    const PageContentRef = ref<InstanceType<typeof PageContent>>()
+
+    const handleResetClick = () => {
+      PageContentRef.value?.getPageData()
+    }
+
+    const handleQueryClick = (queryInfo:any) => {
+      PageContentRef.value?.getPageData(queryInfo)
+    }
+
     return {
       searchFormConfig,
-      contentTableConfig
+      contentTableConfig,
+      PageContentRef,
+      handleResetClick,
+      handleQueryClick,
     }
   }
 })

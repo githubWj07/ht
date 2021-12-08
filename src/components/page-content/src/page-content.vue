@@ -39,21 +39,29 @@ export default defineComponent({
       }
   },
   setup() {
-      const store = useStore()
+    const store = useStore()
     
-    //获取user数据
-    store.dispatch('system/getPageListAction', {
-      pageUrl:'/users/list',
-      queryInfo: {
-        offset: 0,
-        size: 10
-      }
-    })
+    //发送网络请求（获取user数据）
+    const getPageData = (queryInfo:any = {}) => {
+      store.dispatch('system/getPageListAction', {
+        pageUrl:'/users/list',
+        queryInfo: {
+          offset: 0,
+          size: 10,
+          ...queryInfo
+        }
+      })
+     
+    }
 
+    getPageData()
+
+    //从vuex中获取数据
     const userList = computed(() => store.state.system.userList)
     const userCount = computed(() => store.state.system.userCount)
     return {
-        userList
+        userList,
+        getPageData
     }
   }
 })
