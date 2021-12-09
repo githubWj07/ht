@@ -8,6 +8,7 @@
     <PageContent 
       ref="PageContentRef"
       :contentTableConfig="contentTableConfig" 
+      pageName="user"
     />
   </div>
 </template>
@@ -22,6 +23,8 @@ import PageContent from '@/components/page-content'
 import { searchFormConfig } from './config/search.config'
 import { contentTableConfig } from './config/content.config'
 
+import { usePageSearch } from '@/hooks/usePageSearch'
+
 export default defineComponent({
   name: 'user',
   components: {
@@ -29,22 +32,14 @@ export default defineComponent({
     PageContent
   },
   setup() {
-    const PageContentRef = ref<InstanceType<typeof PageContent>>()
-
-    const handleResetClick = () => {
-      PageContentRef.value?.getPageData()
-    }
-
-    const handleQueryClick = (queryInfo:any) => {
-      PageContentRef.value?.getPageData(queryInfo)
-    }
+    const [ PageContentRef, handleResetClick, handleQueryClick ] = usePageSearch()
 
     return {
       searchFormConfig,
       contentTableConfig,
       PageContentRef,
       handleResetClick,
-      handleQueryClick,
+      handleQueryClick
     }
   }
 })

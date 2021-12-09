@@ -17,7 +17,7 @@
           <el-button size="mini" type="text">编辑</el-button>
           <el-button size="mini" type="text">删除</el-button>
         </template>
-      </HyTable>
+      </HyTable> 
     </div>
 </template>
 
@@ -36,15 +36,19 @@ export default defineComponent({
       contentTableConfig:{
           type: Object,
           require: true
+      },
+      pageName: {
+        type: String,
+        required: true
       }
   },
-  setup() {
+  setup(props) {
     const store = useStore()
     
     //发送网络请求（获取user数据）
     const getPageData = (queryInfo:any = {}) => {
       store.dispatch('system/getPageListAction', {
-        pageUrl:'/users/list',
+        pageName: props.pageName,
         queryInfo: {
           offset: 0,
           size: 10,
