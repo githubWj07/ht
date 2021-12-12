@@ -13,7 +13,7 @@ export function accountLoginRequest(account: IAccount) {
     return wRequest.post({
         url: LoginAPI.AccountLogin,
         data: {
-            "name": "codertest",
+            "name": "coderwhy",
             "password": "123456"
         },
     })

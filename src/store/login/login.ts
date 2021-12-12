@@ -41,7 +41,7 @@ const loginModule: Module<ILoginState, IRootState> = {
 
             //userMenus 映射到=> routes
             const routes = mapMenusToRoutes(userMenus)
-            console.log(routes)
+            // console.log(routes)
             routes.forEach( (route) => {
                 router.addRoute('main', route)
             })
@@ -52,8 +52,8 @@ const loginModule: Module<ILoginState, IRootState> = {
             //1.实现登录逻辑
             const loginResult = await accountLoginRequest(payload);
             const {id, token} = loginResult.data
-            console.log(loginResult)
-            console.log(id)
+            // console.log(loginResult)
+            // console.log(id)
             commit('changeToken', token)
             localCache.setCache('token', token)
 
@@ -62,14 +62,14 @@ const loginModule: Module<ILoginState, IRootState> = {
             const userInfo = userInfoResult.data;
             commit('changeUserInfo', userInfo)
             localCache.setCache('userInfo', userInfo)
-            console.log(userInfoResult)
+            // console.log(userInfoResult)
 
             //请求用户菜单
             const userMenusResult = await requestUserMenusByRoleId(userInfo.role.id);
             const userMenus = userMenusResult.data;
             commit('changeUserMenus', userMenus)
             localCache.setCache('userMenus', userMenus)
-            console.log(userMenus)
+            console.log(userMenusResult)
 
             //跳到首页
             router.push('/main')
